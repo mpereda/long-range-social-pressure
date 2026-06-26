@@ -46,7 +46,7 @@ Requires Python ≥ 3.10.
 | λ | 0.5 (main); 0.1–0.9 (sensitivity) |
 | Update rule | Fermi, K = 0.1 |
 | Networks | BA and ER, z = 4 and z = 16 |
-| Stopping condition | 100 000-generation transient; stationary if \|Δρ/Δt\| < 10⁻² over 100 generations |
+| Stopping condition | Adaptive: every 100 gens (min 500), stationary if \|⟨ρ⟩(t) − ⟨ρ⟩(t−100)\| / 100 < 10⁻²; then average ⟨ρ⟩ over next 100 gens |
 
 ## References
 
