@@ -1,0 +1,10 @@
+data/*.csv
+data/*.tsv
+data/*.parquet
+__pycache__/
+.ipynb_checkpoints/
+*.pyc
+*.pyo
+.DS_Store
+*.nbc
+*.nbi
