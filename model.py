@@ -153,6 +153,27 @@ def _fermi(C, pi, game_ptr, game_data, K, r1, r2, N):
     return new_C
 
 
+@njit(cache=True)
+def _rep(C, pi, game_ptr, game_data, k_max, b, r1, r2, N):
+    """
+    Synchronous replicator (proportional imitation) update — PRE 2016 rule.
+    Node i picks a random game-neighbor j (via r1); copies j if pi_j > pi_i
+    with probability (pi_j - pi_i) / Φ,  Φ = k_max * b.
+    """
+    phi = k_max * b
+    new_C = C.copy()
+    for i in range(N):
+        deg = game_ptr[i + 1] - game_ptr[i]
+        if deg == 0:
+            continue
+        j_idx = min(int(r1[i] * deg), deg - 1)
+        j     = game_data[game_ptr[i] + j_idx]
+        diff  = pi[j] - pi[i]
+        if diff > 0.0 and r2[i] < diff / phi:
+            new_C[i] = C[j]
+    return new_C
+
+
 # ─── Single replication ────────────────────────────────────────────────────
 
 _MIN_GENS    = 500
@@ -193,39 +214,80 @@ def _run_one(game_ptr, game_data, shell_ptr, shell_data, alpha, b, theta, K, see
     return float(np.mean(rho_hist[-_CHECK_EVERY:]))
 
 
+def _run_one_rep(game_ptr, game_data, shell_ptr, shell_data, alpha, b, theta, seed):
+    """Single replication with replicator dynamics (PRE 2016 rule, Φ = k_max * b)."""
+    rng   = np.random.default_rng(seed)
+    N     = int(game_ptr.shape[0] - 1)
+    L     = int(alpha.shape[0])
+    k_max = int(np.max(np.diff(game_ptr)))
+
+    C = rng.random(N) < 0.5
+    V = C & (rng.random(N) < 0.5)
+
+    def _step():
+        nonlocal C, V
+        I  = _influence(V, shell_ptr, shell_data, alpha, N, L)
+        Tv = 1.0 + (b - 1.0) * (1.0 - I)
+        pi = _payoffs(C, Tv, game_ptr, game_data, N)
+        C  = _rep(C, pi, game_ptr, game_data, k_max, b, rng.random(N), rng.random(N), N)
+        V  = C & (I >= theta)
+        return float(C.mean())
+
+    rho_hist = []
+    for t in range(1, _MAX_GENS + 1):
+        rho_hist.append(_step())
+        if t >= _MIN_GENS and t % _CHECK_EVERY == 0:
+            slope = abs(rho_hist[-1] - rho_hist[-1 - _CHECK_EVERY]) / _CHECK_EVERY
+            if slope < _SLOPE_THR:
+                return float(np.mean([_step() for _ in range(_CHECK_EVERY)]))
+
+    return float(np.mean(rho_hist[-_CHECK_EVERY:]))
+
+
 # ─── Public API ────────────────────────────────────────────────────────────
 
 
 def run_replications(game_ptr, game_data, shell_ptr, shell_data, alpha,
-                     b, theta, K=0.1, n_rep=100, n_jobs=-1, base_seed=0):
+                     b, theta, K=0.1, n_rep=100, n_jobs=-1, base_seed=0,
+                     update_rule="fermi"):
     """
     Run n_rep independent replications in parallel (threads; numba releases GIL).
     Returns float array of shape (n_rep,) with stationary ρ per replication.
+
+    update_rule: 'fermi' (default, K=0.1) or 'rep' (replicator, PRE 2016).
     """
+    if update_rule == "fermi":
+        worker = delayed(_run_one)
+        args   = lambda rep: (game_ptr, game_data, shell_ptr, shell_data,
+                               alpha, b, theta, K, base_seed + rep)
+    elif update_rule == "rep":
+        worker = delayed(_run_one_rep)
+        args   = lambda rep: (game_ptr, game_data, shell_ptr, shell_data,
+                               alpha, b, theta, base_seed + rep)
+    else:
+        raise ValueError(f"update_rule must be 'fermi' or 'rep', got {update_rule!r}")
+
     return np.array(
         Parallel(n_jobs=n_jobs, prefer="threads")(
-            delayed(_run_one)(
-                game_ptr, game_data, shell_ptr, shell_data,
-                alpha, b, theta, K, base_seed + rep,
-            )
-            for rep in range(n_rep)
+            worker(*args(rep)) for rep in range(n_rep)
         )
     )
 
 
 def run_sweep(game_ptr, game_data, shell_ptr, shell_data, alpha,
               b_values, theta_values,
-              K=0.1, n_rep=100, n_jobs=-1, base_seed=0):
+              K=0.1, n_rep=100, n_jobs=-1, base_seed=0, update_rule="fermi"):
     """
     Sweep over all (b, θ) combinations.
     Returns pd.DataFrame with columns: b, theta, rho_mean, rho_std.
+    update_rule: 'fermi' or 'rep'.
     """
     records = []
     for b in b_values:
         for theta in theta_values:
             rhos = run_replications(
                 game_ptr, game_data, shell_ptr, shell_data, alpha,
-                b, theta, K, n_rep, n_jobs, base_seed,
+                b, theta, K, n_rep, n_jobs, base_seed, update_rule,
             )
             records.append({
                 "b":        round(float(b), 6),
@@ -237,15 +299,19 @@ def run_sweep(game_ptr, game_data, shell_ptr, shell_data, alpha,
 
 
 def warm_up():
-    """Pre-compile numba kernels on a small graph to avoid first-call JIT delay."""
+    """Pre-compile all numba kernels on a small graph to avoid first-call JIT delay."""
     G  = nx.barabasi_albert_graph(20, 2, seed=0)
     gp, gd = game_csr(G)
     sp, sd = shells_csr(G, 2)
     al = geometric_kernel(2, 0.5)
     N  = G.number_of_nodes()
+    k_max = int(np.max(np.diff(gp)))
     V  = np.ones(N, dtype=np.bool_)
     C  = np.ones(N, dtype=np.bool_)
     T  = np.ones(N, dtype=np.float64)
-    pi = _payoffs(C, T, gp, gd, N)
+    r1 = np.random.random(N)
+    r2 = np.random.random(N)
     _influence(V, sp, sd, al, N, 2)
-    _fermi(C, pi, gp, gd, 0.1, np.random.random(N), np.random.random(N), N)
+    pi = _payoffs(C, T, gp, gd, N)
+    _fermi(C, pi, gp, gd, 0.1, r1, r2, N)
+    _rep(C, pi, gp, gd, k_max, 1.5, r1, r2, N)
