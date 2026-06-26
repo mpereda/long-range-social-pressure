@@ -1,6 +1,6 @@
 # long-range-social-pressure
 
-Code accompanying the paper **"Long-range social pressure and the evolution of cooperation in complex networks"** (Pereda & Muller, in preparation).
+Code accompanying the paper **"Long-range social pressure and the evolution of cooperation in complex networks"** (M. Pereda and G. Muller, in preparation).
 
 ## Overview
 
