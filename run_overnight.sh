@@ -12,6 +12,11 @@ cd "$REPO"
 TIMEOUT=86400   # 24 horas por notebook
 LOG="$REPO/overnight_run.log"
 
+# Impide que el Mac se duerma (pantalla puede apagarse, solo el sistema se mantiene activo)
+caffeinate -i &
+CAFFEINATE_PID=$!
+trap "kill $CAFFEINATE_PID 2>/dev/null" EXIT   # mata caffeinate al terminar o si hay error
+
 echo "=============================" | tee "$LOG"
 echo "Inicio: $(date)"               | tee -a "$LOG"
 echo "Directorio: $REPO"             | tee -a "$LOG"
