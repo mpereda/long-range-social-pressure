@@ -74,12 +74,11 @@ def shells_csr(G, L):
 
 def geometric_kernel(L, lam=0.5):
     """
-    Normalized geometric decay kernel.
-    alpha[d] = lam^d / sum(lam^0 + ... + lam^{L-1}),  d = 0..L-1 (distance = d+1).
+    Unnormalized geometric decay kernel: alpha[d] = lam^d, d = 0..L-1.
     L=1 → alpha=[1.0], recovering the PRE 2016 limit.
+    Adding circles always adds influence (I_i capped at 1 in _influence).
     """
-    alpha = np.fromiter((lam ** d for d in range(L)), dtype=np.float64, count=L)
-    return alpha / alpha.sum()
+    return np.fromiter((lam ** d for d in range(L)), dtype=np.float64, count=L)
 
 
 # ─── Numba kernels ─────────────────────────────────────────────────────────
@@ -105,7 +104,7 @@ def _influence(V, shell_ptr, shell_data, alpha, N, L):
                 if V[shell_data[k]]:
                     cnt += 1
             acc += alpha[d] * cnt / size
-        I[i] = acc
+        I[i] = min(acc, 1.0)
     return I
 
 
