@@ -1,10 +1,14 @@
+![Python](https://img.shields.io/badge/Python-3.10%2B-blue)
+![Status](https://img.shields.io/badge/Status-In_preparation-orange)
+![Target](https://img.shields.io/badge/Target-Physical_Review_E-red)
+
 # long-range-social-pressure
 
-Code accompanying the paper **"Long-range social pressure and the evolution of cooperation in complex networks"** (M. Pereda and G. Muller, in preparation).
+Code accompanying the paper **"Long-range social pressure and the evolution of cooperation in multiplex networks"** (M. Pereda and G. Muller, in preparation).
 
 ## Overview
 
-We extend the model of Pereda (2016) by allowing the social pressure exerted by vigilant individuals to propagate beyond direct neighbors in a duplex network. In the base model, a player's temptation to defect decreases with the fraction of vigilant direct neighbors. Here, vigilance influence reaches nodes at network distance up to L, weighted by a geometric decay kernel (α_l ∝ λ^(l−1)).
+We extend the model of Pereda (2016) by allowing the social pressure exerted by vigilant individuals to propagate beyond direct neighbors in a multiplex network. In the base model, a player's temptation to defect decreases with the fraction of vigilant direct neighbors. Here, vigilance influence reaches nodes at network distance up to L, weighted by a geometric decay kernel (α_l ∝ λ^(l−1)).
 
 The two coupled layers are:
 - **Game layer** — Prisoner's Dilemma played between direct neighbors
@@ -14,25 +18,32 @@ When L = 1 both layers coincide and the model reduces to Pereda (2016). For L > 
 
 ## Repository structure
 
-```
-model.py                         simulation engine (numba-accelerated)
-
-01-REP-vs-Fermi.ipynb            validation: replicator vs Fermi update rule at L = 1
-02-long-range-correlated.ipynb   main results: L = 1–4, maximally correlated duplex
-03-long-range-uncorrelated.ipynb L = 1–4, uncorrelated duplex
-04-lambda-sensitivity.ipynb      sensitivity to the geometric decay parameter λ
-
-data/                            simulation outputs (not tracked by git)
-figures/                         paper figures
-```
+- [`model.py`](model.py): simulation engine ([Numba](https://numba.readthedocs.io/en/stable/)-accelerated)
+- [`01-REP-vs-Fermi.ipynb`](01-REP-vs-Fermi.ipynb): validation — replicator vs Fermi update rule at L = 1
+- [`02-long-range-correlated.ipynb`](02-long-range-correlated.ipynb): main results — L = 1–4, correlated multiplex
+- [`03-long-range-uncorrelated.ipynb`](03-long-range-uncorrelated.ipynb): L = 1–4, uncorrelated multiplex
+- [`04-lambda-sensitivity.ipynb`](04-lambda-sensitivity.ipynb): sensitivity to the geometric decay parameter λ
+- [`data/`](data/): simulation outputs (not tracked by git)
+- [`figures/`](figures/): paper figures
+- [`archive_v1_normalized_kernel/`](archive_v1_normalized_kernel/): archived v1 results (normalized kernel, superseded)
 
 ## Dependencies
+
+Install with:
 
 ```
 pip install -r requirements.txt
 ```
 
-Requires Python ≥ 3.10.
+Requires Python ≥ 3.10. Main dependencies:
+
+- [NumPy](https://numpy.org/doc/) ≥ 1.24
+- [Numba](https://numba.readthedocs.io/en/stable/) ≥ 0.58 — JIT compilation for the simulation engine
+- [NetworkX](https://networkx.org/documentation/stable/) ≥ 3.0 — network generation and BFS
+- [pandas](https://pandas.pydata.org/docs/) ≥ 2.0
+- [Matplotlib](https://matplotlib.org/stable/index.html) ≥ 3.7
+- [SciPy](https://docs.scipy.org/doc/scipy/) ≥ 1.10
+- [Jupyter](https://jupyter.org/) ≥ 1.0
 
 ## Model summary
 
