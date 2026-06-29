@@ -1,23 +1,7 @@
 =============================
-Inicio: Fri Jun 26 14:06:15 CEST 2026
+Inicio: Mon Jun 29 09:08:03 CEST 2026
 Directorio: /Users/mariapereda/Library/CloudStorage/Dropbox/UPM/investigacion/Mis_trabajos_en_curso/19. GabrielleMuller - TFM - Vigilantes 2.0 con distancia Estrada/long-range-social-pressure
 =============================
 
->>> Arrancando 02-long-range-correlated.ipynb  (Fri Jun 26 14:06:15 CEST 2026)
+>>> Arrancando 02-long-range-correlated.ipynb  (Mon Jun 29 09:08:03 CEST 2026)
 [NbConvertApp] Converting notebook 02-long-range-correlated.ipynb to notebook
-[NbConvertApp] Writing 423807 bytes to 02-long-range-correlated.ipynb
-<<< Terminado  02-long-range-correlated.ipynb  (Fri Jun 26 20:28:22 CEST 2026)
-
->>> Arrancando 03-long-range-uncorrelated.ipynb  (Fri Jun 26 20:28:22 CEST 2026)
-[NbConvertApp] Converting notebook 03-long-range-uncorrelated.ipynb to notebook
-[NbConvertApp] Writing 249506 bytes to 03-long-range-uncorrelated.ipynb
-<<< Terminado  03-long-range-uncorrelated.ipynb  (Sat Jun 27 02:47:38 CEST 2026)
-
->>> Arrancando 04-lambda-sensitivity.ipynb  (Sat Jun 27 02:47:38 CEST 2026)
-[NbConvertApp] Converting notebook 04-lambda-sensitivity.ipynb to notebook
-[NbConvertApp] Writing 170358 bytes to 04-lambda-sensitivity.ipynb
-<<< Terminado  04-lambda-sensitivity.ipynb  (Sat Jun 27 18:45:02 CEST 2026)
-
-=============================
-Todo terminado: Sat Jun 27 18:45:02 CEST 2026
-=============================
