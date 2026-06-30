@@ -5,3 +5,13 @@ Directorio: /Users/mariapereda/Library/CloudStorage/Dropbox/UPM/investigacion/Mi
 
 >>> Arrancando 02-long-range-correlated.ipynb  (Mon Jun 29 09:08:03 CEST 2026)
 [NbConvertApp] Converting notebook 02-long-range-correlated.ipynb to notebook
+[NbConvertApp] Writing 498367 bytes to 02-long-range-correlated.ipynb
+<<< Terminado  02-long-range-correlated.ipynb  (Mon Jun 29 15:38:53 CEST 2026)
+
+>>> Arrancando 03-long-range-uncorrelated.ipynb  (Mon Jun 29 15:38:53 CEST 2026)
+[NbConvertApp] Converting notebook 03-long-range-uncorrelated.ipynb to notebook
+[NbConvertApp] Writing 266918 bytes to 03-long-range-uncorrelated.ipynb
+<<< Terminado  03-long-range-uncorrelated.ipynb  (Mon Jun 29 22:02:45 CEST 2026)
+
+>>> Arrancando 04-lambda-sensitivity.ipynb  (Mon Jun 29 22:02:45 CEST 2026)
+[NbConvertApp] Converting notebook 04-lambda-sensitivity.ipynb to notebook
