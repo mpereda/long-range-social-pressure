@@ -2,6 +2,9 @@ data/*.csv
 data/*.tsv
 data/*.parquet
 papers/
+writting_style/
+real_networks/REDES_medicos/
+real_networks/*.csv
 __pycache__/
 .ipynb_checkpoints/
 *.pyc
