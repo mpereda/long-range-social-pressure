@@ -50,7 +50,7 @@ print(f'middle (0.2 <= rho <= 0.8):         {((rhos >= 0.2) & (rhos <= 0.8)).sum
 plt.rcParams.update({'font.size': 14, 'axes.labelsize': 16,
                      'xtick.labelsize': 12, 'ytick.labelsize': 12, 'figure.dpi': 120})
 fig, ax = plt.subplots(figsize=(5, 3.2), constrained_layout=True)
-ax.hist(rhos, bins=20, color=mpl.colormaps['Dark2'](1), edgecolor='white', lw=0.5)
+ax.hist(rhos, bins=20, color=mpl.colormaps['GnBu'](0.75), edgecolor='white', lw=0.5)
 ax.set_xlabel(r'$\langle\rho\rangle$ (stationary cooperation fraction)')
 ax.set_ylabel(f'Count (out of {N_REP})')
 ax.set_title(rf'BA $z=16$, $b={B}$, $\theta={THETA}$, $L={L}$')
