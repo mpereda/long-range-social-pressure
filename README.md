@@ -1,5 +1,5 @@
 ![Python](https://img.shields.io/badge/Python-3.10%2B-blue)
-![Status](https://img.shields.io/badge/Status-In_preparation-orange)
+![Status](https://img.shields.io/badge/Status-Submitted-green)
 ![Target](https://img.shields.io/badge/Target-Physical_Review_E-red)
 
 # long-range-social-pressure
