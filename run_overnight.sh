@@ -35,9 +35,11 @@ run_notebook() {
     echo "<<< Terminado  $nb  ($(date))" | tee -a "$LOG"
 }
 
+run_notebook "01-REP-vs-Fermi.ipynb"
 run_notebook "02-long-range-correlated.ipynb"
 run_notebook "03-long-range-uncorrelated.ipynb"
 run_notebook "04-lambda-sensitivity.ipynb"
+run_notebook "05-real-network-CKM.ipynb"
 
 echo "" | tee -a "$LOG"
 echo "=============================" | tee -a "$LOG"

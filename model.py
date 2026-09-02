@@ -181,10 +181,40 @@ _SLOPE_THR   = 1e-2
 _MAX_GENS    = 500_000
 
 
+def _windowed_stationary_mean(step_fn):
+    """
+    Adaptive convergence detection, window-mean form.
+
+    Runs step_fn() (one generation, returns the instantaneous cooperator
+    fraction) and accumulates non-overlapping windows of _CHECK_EVERY
+    generations. After a minimum transient of _MIN_GENS generations, the
+    system is declared stationary once two *consecutive window means* agree
+    to within _SLOPE_THR, i.e. |mean(window_k) - mean(window_{k-1})| <
+    _SLOPE_THR. The mean of window_k is then returned as the stationary
+    value. This corrects an earlier implementation that compared two single
+    raw generations 100 apart divided by 100 (bounded by construction at
+    1/100, hence trivially satisfied on the first check at t=_MIN_GENS
+    regardless of whether the system had actually converged) instead of
+    comparing two window means as intended and as described in
+    Pereda (2016).
+    """
+    n_windows_min = _MIN_GENS // _CHECK_EVERY
+    prev_window = None
+    window_mean = None
+    for k in range(1, _MAX_GENS // _CHECK_EVERY + 1):
+        window_mean = sum(step_fn() for _ in range(_CHECK_EVERY)) / _CHECK_EVERY
+        if k > n_windows_min and prev_window is not None:
+            if abs(window_mean - prev_window) < _SLOPE_THR:
+                return window_mean
+        prev_window = window_mean
+    return window_mean
+
+
 def _run_one(game_ptr, game_data, shell_ptr, shell_data, alpha, b, theta, K, seed):
     """
-    Single replication. Returns ⟨ρ⟩ averaged over 100 generations immediately
-    after the adaptive slope criterion declares stationarity.
+    Single replication. Returns ⟨ρ⟩, the mean cooperator fraction of the
+    100-generation window at which the adaptive slope criterion declares
+    stationarity (see _windowed_stationary_mean).
     """
     rng = np.random.default_rng(seed)
     N   = int(game_ptr.shape[0] - 1)
@@ -202,15 +232,7 @@ def _run_one(game_ptr, game_data, shell_ptr, shell_data, alpha, b, theta, K, see
         V  = C & (I >= theta)
         return float(C.mean())
 
-    rho_hist = []
-    for t in range(1, _MAX_GENS + 1):
-        rho_hist.append(_step())
-        if t >= _MIN_GENS and t % _CHECK_EVERY == 0:
-            slope = abs(rho_hist[-1] - rho_hist[-1 - _CHECK_EVERY]) / _CHECK_EVERY
-            if slope < _SLOPE_THR:
-                return float(np.mean([_step() for _ in range(_CHECK_EVERY)]))
-
-    return float(np.mean(rho_hist[-_CHECK_EVERY:]))
+    return _windowed_stationary_mean(_step)
 
 
 def _run_one_rep(game_ptr, game_data, shell_ptr, shell_data, alpha, b, theta, seed):
@@ -232,15 +254,7 @@ def _run_one_rep(game_ptr, game_data, shell_ptr, shell_data, alpha, b, theta, se
         V  = C & (I >= theta)
         return float(C.mean())
 
-    rho_hist = []
-    for t in range(1, _MAX_GENS + 1):
-        rho_hist.append(_step())
-        if t >= _MIN_GENS and t % _CHECK_EVERY == 0:
-            slope = abs(rho_hist[-1] - rho_hist[-1 - _CHECK_EVERY]) / _CHECK_EVERY
-            if slope < _SLOPE_THR:
-                return float(np.mean([_step() for _ in range(_CHECK_EVERY)]))
-
-    return float(np.mean(rho_hist[-_CHECK_EVERY:]))
+    return _windowed_stationary_mean(_step)
 
 
 # ─── Public API ────────────────────────────────────────────────────────────
