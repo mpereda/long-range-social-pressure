@@ -153,20 +153,30 @@ def _fermi(C, pi, game_ptr, game_data, K, r1, r2, N):
 
 
 @njit(cache=True)
-def _rep(C, pi, game_ptr, game_data, k_max, b, r1, r2, N):
+def _rep(C, pi, game_ptr, game_data, b, r1, r2, N):
     """
-    Synchronous replicator (proportional imitation) update — PRE 2016 rule.
+    Synchronous replicator (proportional imitation) update — PRE 2016 rule
+    (Pereda2016 Eq. 4; Roca2009 Eq. 35).
     Node i picks a random game-neighbor j (via r1); copies j if pi_j > pi_i
-    with probability (pi_j - pi_i) / Φ,  Φ = k_max * b.
+    with probability (pi_j - pi_i) / Phi_ij, Phi_ij = max(k_i, k_j) * b
+    (per-pair normalization; b = max(1,T) - min(0,S) under our weak-PD
+    payoffs R=1, S=P=0, T=b).
+    NOTE: an earlier version used a single global Phi = k_max * b (k_max the
+    largest degree in the whole network) instead of the per-pair max(k_i,k_j).
+    This is a valid upper bound (still keeps the probability in [0,1]) but
+    not the PRE2016/Roca2009 rule: it makes imitation uniformly slower for
+    any pair not involving the network's single highest-degree hub, which in
+    heterogeneous networks (BA) is nearly every pair. Fixed 2026-09-02.
     """
-    phi = k_max * b
     new_C = C.copy()
     for i in range(N):
-        deg = game_ptr[i + 1] - game_ptr[i]
-        if deg == 0:
+        deg_i = game_ptr[i + 1] - game_ptr[i]
+        if deg_i == 0:
             continue
-        j_idx = min(int(r1[i] * deg), deg - 1)
+        j_idx = min(int(r1[i] * deg_i), deg_i - 1)
         j     = game_data[game_ptr[i] + j_idx]
+        deg_j = game_ptr[j + 1] - game_ptr[j]
+        phi   = max(deg_i, deg_j) * b
         diff  = pi[j] - pi[i]
         if diff > 0.0 and r2[i] < diff / phi:
             new_C[i] = C[j]
@@ -236,11 +246,10 @@ def _run_one(game_ptr, game_data, shell_ptr, shell_data, alpha, b, theta, K, see
 
 
 def _run_one_rep(game_ptr, game_data, shell_ptr, shell_data, alpha, b, theta, seed):
-    """Single replication with replicator dynamics (PRE 2016 rule, Φ = k_max * b)."""
+    """Single replication with replicator dynamics (PRE 2016 rule, per-pair Φ=max(k_i,k_j)·b)."""
     rng   = np.random.default_rng(seed)
     N     = int(game_ptr.shape[0] - 1)
     L     = int(alpha.shape[0])
-    k_max = int(np.max(np.diff(game_ptr)))
 
     C = rng.random(N) < 0.5
     V = C & (rng.random(N) < 0.5)
@@ -250,7 +259,7 @@ def _run_one_rep(game_ptr, game_data, shell_ptr, shell_data, alpha, b, theta, se
         I  = _influence(V, shell_ptr, shell_data, alpha, N, L)
         Tv = 1.0 + (b - 1.0) * (1.0 - I)
         pi = _payoffs(C, Tv, game_ptr, game_data, N)
-        C  = _rep(C, pi, game_ptr, game_data, k_max, b, rng.random(N), rng.random(N), N)
+        C  = _rep(C, pi, game_ptr, game_data, b, rng.random(N), rng.random(N), N)
         V  = C & (I >= theta)
         return float(C.mean())
 
@@ -318,7 +327,6 @@ def warm_up():
     sp, sd = shells_csr(G, 2)
     al = geometric_kernel(2, 0.5)
     N  = G.number_of_nodes()
-    k_max = int(np.max(np.diff(gp)))
     V  = np.ones(N, dtype=np.bool_)
     C  = np.ones(N, dtype=np.bool_)
     T  = np.ones(N, dtype=np.float64)
@@ -327,4 +335,4 @@ def warm_up():
     _influence(V, sp, sd, al, N, 2)
     pi = _payoffs(C, T, gp, gd, N)
     _fermi(C, pi, gp, gd, 0.1, r1, r2, N)
-    _rep(C, pi, gp, gd, k_max, 1.5, r1, r2, N)
+    _rep(C, pi, gp, gd, 1.5, r1, r2, N)
