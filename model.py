@@ -153,6 +153,66 @@ def _fermi(C, pi, game_ptr, game_data, K, r1, r2, N):
 
 
 @njit(cache=True)
+def _payoff_one(node, C, T, game_ptr, game_data):
+    """
+    Payoff of a single node under the current population state C, evaluated
+    on demand (used by the asynchronous update below, which needs the payoff
+    of only two nodes -- the focal agent and its chosen neighbor -- at each
+    elementary step, rather than the full array _payoffs() computes).
+    """
+    c_nbr = 0
+    for k in range(game_ptr[node], game_ptr[node + 1]):
+        if C[game_data[k]]:
+            c_nbr += 1
+    return float(c_nbr) if C[node] else T[node] * float(c_nbr)
+
+
+@njit(cache=True)
+def _fermi_async_generation(C, T, game_ptr, game_data, K, N, r_agent, r_nbr_frac, r_bernoulli):
+    """
+    Asynchronous Fermi update, R2#8 robustness control (PRE major revision).
+    One generation = N sequential elementary updates, in the convention of
+    Szabo & Fath (2007, Phys. Rep. 446, 97): at each elementary step t,
+    an agent i = r_agent[t] and one of its game-neighbors j are drawn at
+    random, their payoffs are computed from the CURRENT state of C (not a
+    snapshot frozen at the start of the generation, unlike the synchronous
+    _fermi() above), and i copies j's strategy with the usual Fermi
+    probability. Because C is mutated in place as the loop proceeds, later
+    elementary steps within the same generation already see the outcome of
+    earlier ones -- this is what makes the update asynchronous.
+    r_agent draws N agents uniformly with replacement (so some agents are
+    updated more than once per generation and some not at all, matching the
+    standard convention); r_nbr_frac and r_bernoulli play the same role as
+    r1/r2 in _fermi(). T (the temptation array, itself derived from the
+    vigilance state) is held fixed for the whole generation, exactly as in
+    the synchronous version -- only the strategy-update mechanism differs,
+    so any difference in outcome between the sync and async controls is
+    attributable specifically to that, not to a coupled change in how
+    vigilance is computed.
+    Mutates and returns C.
+    """
+    for t in range(N):
+        i = r_agent[t]
+        deg = game_ptr[i + 1] - game_ptr[i]
+        if deg == 0:
+            continue
+        j_idx = min(int(r_nbr_frac[t] * deg), deg - 1)
+        j     = game_data[game_ptr[i] + j_idx]
+        pi_i  = _payoff_one(i, C, T, game_ptr, game_data)
+        pi_j  = _payoff_one(j, C, T, game_ptr, game_data)
+        diff  = (pi_j - pi_i) / K
+        if diff > 500.0:
+            prob = 1.0
+        elif diff < -500.0:
+            prob = 0.0
+        else:
+            prob = 1.0 / (1.0 + math.exp(-diff))
+        if r_bernoulli[t] < prob:
+            C[i] = C[j]
+    return C
+
+
+@njit(cache=True)
 def _rep(C, pi, game_ptr, game_data, b, r1, r2, N):
     """
     Synchronous replicator (proportional imitation) update — PRE 2016 rule
@@ -266,6 +326,38 @@ def _run_one_rep(game_ptr, game_data, shell_ptr, shell_data, alpha, b, theta, se
     return _windowed_stationary_mean(_step)
 
 
+def _run_one_async(game_ptr, game_data, shell_ptr, shell_data, alpha, b, theta, K, seed):
+    """
+    Single replication, ASYNCHRONOUS Fermi update (R2#8 robustness control).
+    Identical to _run_one() except the strategy update within each generation
+    calls _fermi_async_generation() (N sequential elementary updates) instead
+    of the synchronous _fermi() (one simultaneous sweep). Vigilance/influence
+    are still recomputed once per generation at generation boundaries in
+    both cases -- see _fermi_async_generation()'s docstring for why.
+    """
+    rng = np.random.default_rng(seed)
+    N   = int(game_ptr.shape[0] - 1)
+    L   = int(alpha.shape[0])
+
+    C = rng.random(N) < 0.5
+    V = C & (rng.random(N) < 0.5)
+
+    def _step():
+        nonlocal C, V
+        I  = _influence(V, shell_ptr, shell_data, alpha, N, L)
+        Tv = 1.0 + (b - 1.0) * (1.0 - I)
+        C_new = C.copy()
+        r_agent    = rng.integers(0, N, size=N)
+        r_nbr_frac = rng.random(N)
+        r_bernoulli = rng.random(N)
+        C  = _fermi_async_generation(C_new, Tv, game_ptr, game_data, K, N,
+                                      r_agent, r_nbr_frac, r_bernoulli)
+        V  = C & (I >= theta)
+        return float(C.mean())
+
+    return _windowed_stationary_mean(_step)
+
+
 # ─── Public API ────────────────────────────────────────────────────────────
 
 
@@ -276,7 +368,10 @@ def run_replications(game_ptr, game_data, shell_ptr, shell_data, alpha,
     Run n_rep independent replications in parallel (threads; numba releases GIL).
     Returns float array of shape (n_rep,) with stationary ρ per replication.
 
-    update_rule: 'fermi' (default, K=0.1) or 'rep' (replicator, PRE 2016).
+    update_rule: 'fermi' (default, K=0.1), 'rep' (replicator, PRE 2016), or
+    'fermi_async' (asynchronous Fermi control, R2#8 robustness check --
+    N sequential elementary updates per generation instead of one
+    synchronous sweep; see _fermi_async_generation()'s docstring).
     """
     if update_rule == "fermi":
         worker = delayed(_run_one)
@@ -286,8 +381,13 @@ def run_replications(game_ptr, game_data, shell_ptr, shell_data, alpha,
         worker = delayed(_run_one_rep)
         args   = lambda rep: (game_ptr, game_data, shell_ptr, shell_data,
                                alpha, b, theta, base_seed + rep)
+    elif update_rule == "fermi_async":
+        worker = delayed(_run_one_async)
+        args   = lambda rep: (game_ptr, game_data, shell_ptr, shell_data,
+                               alpha, b, theta, K, base_seed + rep)
     else:
-        raise ValueError(f"update_rule must be 'fermi' or 'rep', got {update_rule!r}")
+        raise ValueError(
+            f"update_rule must be 'fermi', 'rep', or 'fermi_async', got {update_rule!r}")
 
     return np.array(
         Parallel(n_jobs=n_jobs, prefer="threads")(
