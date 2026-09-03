@@ -10,7 +10,7 @@ gain for each topology (to avoid noisy fractions where the total L=1->4 gain is 
 
   (a) fraction of total achievable gain captured at each L:
         [<rho>(L) - <rho>(1)] / [<rho>(4) - <rho>(1)]
-  (b) gain relative to the remaining headroom (how much of the possible increase toward
+  (b) gain relative to the remaining gap to full cooperation (how much of the possible increase toward
       full cooperation is captured):
         [<rho>(L) - <rho>(1)] / [1 - <rho>(1)]
 
@@ -89,7 +89,7 @@ axes[0].legend(loc='lower right', framealpha=0.9)
 axes[1].set_xlabel('$L$')
 axes[1].set_ylabel(r'$[\langle\rho\rangle(L)-\langle\rho\rangle(1)]\,/\,'
                     r'[1-\langle\rho\rangle(1)]$')
-axes[1].set_title('(b) Gain relative to remaining headroom')
+axes[1].set_title('(b) Gain relative to remaining cooperation gap')
 axes[1].set_xticks([1, 2, 3, 4])
 axes[1].axhline(1, color='grey', lw=0.5, ls=':')
 axes[1].axhline(0, color='grey', lw=0.5, ls=':')
