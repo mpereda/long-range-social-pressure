@@ -32,7 +32,7 @@ SUMMARY_CSV = os.path.join(OUT_DIR, "network_realization_robustness_summary.csv"
 
 NETWORKS = [("BA", 4), ("BA", 16), ("ER", 4), ("ER", 16)]
 CORRELATIONS = ["corr", "uncorr"]  # corr -> data/02-*.csv, uncorr -> data/03-*.csv
-L_VALUES = [1, 4]                  # extremes: direct-neighbor vs widest range studied
+L_VALUES = [1, 2, 3, 4]             # full range studied, not just the extremes
 N_NET_REALIZATIONS = 10
 N_REP = 100
 LAM = 0.5
