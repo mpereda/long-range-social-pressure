@@ -1,0 +1,89 @@
+BA z=4: r_k corr=1.000 uncorr=0.568 shuffled=-0.031
+BA_z4 coop       L=1 corr             r_k=1.000: rho=0.9652 (3.0s)
+BA_z4 coop       L=1 uncorr           r_k=0.568: rho=0.9627 (2.8s)
+BA_z4 coop       L=1 uncorr_shuffled  r_k=-0.031: rho=0.9654 (2.9s)
+BA_z4 coop       L=4 corr             r_k=1.000: rho=0.9986 (20.7s)
+BA_z4 coop       L=4 uncorr           r_k=0.568: rho=0.9756 (21.6s)
+BA_z4 coop       L=4 uncorr_shuffled  r_k=-0.031: rho=0.9791 (21.9s)
+BA_z4 defect     L=1 corr             r_k=1.000: rho=0.5828 (4.0s)
+BA_z4 defect     L=1 uncorr           r_k=0.568: rho=0.5849 (4.1s)
+BA_z4 defect     L=1 uncorr_shuffled  r_k=-0.031: rho=0.5806 (3.9s)
+BA_z4 defect     L=4 corr             r_k=1.000: rho=0.5870 (31.2s)
+BA_z4 defect     L=4 uncorr           r_k=0.568: rho=0.5903 (36.1s)
+BA_z4 defect     L=4 uncorr_shuffled  r_k=-0.031: rho=0.5755 (31.6s)
+BA_z4 bistable   L=1 corr             r_k=1.000: rho=0.5847 (4.0s)
+BA_z4 bistable   L=1 uncorr           r_k=0.568: rho=0.5847 (4.0s)
+BA_z4 bistable   L=1 uncorr_shuffled  r_k=-0.031: rho=0.5788 (3.9s)
+BA_z4 bistable   L=4 corr             r_k=1.000: rho=0.7505 (27.2s)
+BA_z4 bistable   L=4 uncorr           r_k=0.568: rho=0.5972 (30.8s)
+BA_z4 bistable   L=4 uncorr_shuffled  r_k=-0.031: rho=0.5767 (31.1s)
+BA z=16: r_k corr=1.000 uncorr=0.866 shuffled=0.010
+BA_z16 coop       L=1 corr             r_k=1.000: rho=0.9788 (3.2s)
+BA_z16 coop       L=1 uncorr           r_k=0.866: rho=0.9788 (3.2s)
+BA_z16 coop       L=1 uncorr_shuffled  r_k=0.010: rho=0.9788 (3.2s)
+BA_z16 coop       L=4 corr             r_k=1.000: rho=0.9788 (35.1s)
+BA_z16 coop       L=4 uncorr           r_k=0.866: rho=0.9788 (34.6s)
+BA_z16 coop       L=4 uncorr_shuffled  r_k=0.010: rho=0.9788 (34.3s)
+BA_z16 defect     L=1 corr             r_k=1.000: rho=0.0025 (3.2s)
+BA_z16 defect     L=1 uncorr           r_k=0.866: rho=0.0027 (3.2s)
+BA_z16 defect     L=1 uncorr_shuffled  r_k=0.010: rho=0.0034 (3.2s)
+BA_z16 defect     L=4 corr             r_k=1.000: rho=0.0032 (29.4s)
+BA_z16 defect     L=4 uncorr           r_k=0.866: rho=0.0021 (29.6s)
+BA_z16 defect     L=4 uncorr_shuffled  r_k=0.010: rho=0.0023 (29.6s)
+BA_z16 transition L=1 corr             r_k=1.000: rho=0.1046 (3.6s)
+BA_z16 transition L=1 uncorr           r_k=0.866: rho=0.0743 (3.7s)
+BA_z16 transition L=1 uncorr_shuffled  r_k=0.010: rho=0.0459 (3.8s)
+BA_z16 transition L=4 corr             r_k=1.000: rho=0.4721 (33.8s)
+BA_z16 transition L=4 uncorr           r_k=0.866: rho=0.3738 (35.2s)
+BA_z16 transition L=4 uncorr_shuffled  r_k=0.010: rho=0.3738 (35.3s)
+BA_z16 bistable   L=1 corr             r_k=1.000: rho=0.1056 (3.4s)
+BA_z16 bistable   L=1 uncorr           r_k=0.866: rho=0.0638 (3.5s)
+BA_z16 bistable   L=1 uncorr_shuffled  r_k=0.010: rho=0.0344 (3.7s)
+BA_z16 bistable   L=4 corr             r_k=1.000: rho=0.4761 (32.4s)
+BA_z16 bistable   L=4 uncorr           r_k=0.866: rho=0.3720 (31.8s)
+BA_z16 bistable   L=4 uncorr_shuffled  r_k=0.010: rho=0.3403 (31.5s)
+TOTAL TIME: 718.8s
+ z     regime  L       condition       r_k  rho_mean  rho_std
+ 4   bistable  1            corr  1.000000  0.584691 0.051691
+ 4   bistable  1          uncorr  0.568240  0.584750 0.055997
+ 4   bistable  1 uncorr_shuffled -0.030980  0.578830 0.055463
+ 4   bistable  4            corr  1.000000  0.750518 0.207762
+ 4   bistable  4          uncorr  0.568240  0.597240 0.085080
+ 4   bistable  4 uncorr_shuffled -0.030980  0.576710 0.080107
+ 4       coop  1            corr  1.000000  0.965206 0.087003
+ 4       coop  1          uncorr  0.568240  0.962653 0.089152
+ 4       coop  1 uncorr_shuffled -0.030980  0.965356 0.086130
+ 4       coop  4            corr  1.000000  0.998649 0.013513
+ 4       coop  4          uncorr  0.568240  0.975573 0.074027
+ 4       coop  4 uncorr_shuffled -0.030980  0.979143 0.066976
+ 4     defect  1            corr  1.000000  0.582759 0.054418
+ 4     defect  1          uncorr  0.568240  0.584938 0.056339
+ 4     defect  1 uncorr_shuffled -0.030980  0.580612 0.056294
+ 4     defect  4            corr  1.000000  0.586953 0.046233
+ 4     defect  4          uncorr  0.568240  0.590270 0.042990
+ 4     defect  4 uncorr_shuffled -0.030980  0.575474 0.078289
+16   bistable  1            corr  1.000000  0.105641 0.284108
+16   bistable  1          uncorr  0.866090  0.063761 0.217719
+16   bistable  1 uncorr_shuffled  0.010093  0.034367 0.141703
+16   bistable  4            corr  1.000000  0.476128 0.496224
+16   bistable  4          uncorr  0.866090  0.372000 0.474099
+16   bistable  4 uncorr_shuffled  0.010093  0.340307 0.466035
+16       coop  1            corr  1.000000  0.978833 0.103202
+16       coop  1          uncorr  0.866090  0.978833 0.103202
+16       coop  1 uncorr_shuffled  0.010093  0.978833 0.103202
+16       coop  4            corr  1.000000  0.978833 0.103202
+16       coop  4          uncorr  0.866090  0.978833 0.103202
+16       coop  4 uncorr_shuffled  0.010093  0.978833 0.103202
+16     defect  1            corr  1.000000  0.002506 0.011086
+16     defect  1          uncorr  0.866090  0.002668 0.011166
+16     defect  1 uncorr_shuffled  0.010093  0.003411 0.012168
+16     defect  4            corr  1.000000  0.003250 0.012105
+16     defect  4          uncorr  0.866090  0.002118 0.010464
+16     defect  4 uncorr_shuffled  0.010093  0.002255 0.010812
+16 transition  1            corr  1.000000  0.104632 0.252362
+16 transition  1          uncorr  0.866090  0.074259 0.195961
+16 transition  1 uncorr_shuffled  0.010093  0.045881 0.106245
+16 transition  4            corr  1.000000  0.472095 0.490419
+16 transition  4          uncorr  0.866090  0.373830 0.473160
+16 transition  4 uncorr_shuffled  0.010093  0.373832 0.472830
+Saved: /Users/mariapereda/Library/CloudStorage/Dropbox/UPM/investigacion/Mis_trabajos_en_curso/19. GabrielleMuller - TFM - Vigilantes 2.0 con distancia Estrada/long-range-social-pressure/robustness_checks/data/label_shuffle_control.csv /Users/mariapereda/Library/CloudStorage/Dropbox/UPM/investigacion/Mis_trabajos_en_curso/19. GabrielleMuller - TFM - Vigilantes 2.0 con distancia Estrada/long-range-social-pressure/robustness_checks/data/label_shuffle_control_summary.csv
