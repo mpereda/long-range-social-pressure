@@ -1,23 +1,28 @@
 =============================
-Inicio: Mon Jun 29 09:08:03 CEST 2026
+Inicio: Wed Sep  2 11:52:21 CEST 2026
 Directorio: /Users/mariapereda/Library/CloudStorage/Dropbox/UPM/investigacion/Mis_trabajos_en_curso/19. GabrielleMuller - TFM - Vigilantes 2.0 con distancia Estrada/long-range-social-pressure
 =============================
 
->>> Arrancando 02-long-range-correlated.ipynb  (Mon Jun 29 09:08:03 CEST 2026)
+>>> Arrancando 01-REP-vs-Fermi.ipynb  (Wed Sep  2 11:52:21 CEST 2026)
+[NbConvertApp] Converting notebook 01-REP-vs-Fermi.ipynb to notebook
+[IPKernelApp] WARNING | Kernel is running over TCP without encryption. All communication (including code and outputs) is sent in plain text and is susceptible to eavesdropping. Use IPC transport or launch with kernel manager-provisioned CurveZMQ keys to enable transport encryption.
+[NbConvertApp] Writing 407703 bytes to 01-REP-vs-Fermi.ipynb
+<<< Terminado  01-REP-vs-Fermi.ipynb  (Wed Sep  2 11:52:26 CEST 2026)
+
+>>> Arrancando 02-long-range-correlated.ipynb  (Wed Sep  2 11:52:26 CEST 2026)
 [NbConvertApp] Converting notebook 02-long-range-correlated.ipynb to notebook
-[NbConvertApp] Writing 498367 bytes to 02-long-range-correlated.ipynb
-<<< Terminado  02-long-range-correlated.ipynb  (Mon Jun 29 15:38:53 CEST 2026)
+[IPKernelApp] WARNING | Kernel is running over TCP without encryption. All communication (including code and outputs) is sent in plain text and is susceptible to eavesdropping. Use IPC transport or launch with kernel manager-provisioned CurveZMQ keys to enable transport encryption.
+[NbConvertApp] Writing 520596 bytes to 02-long-range-correlated.ipynb
+<<< Terminado  02-long-range-correlated.ipynb  (Wed Sep  2 19:09:57 CEST 2026)
 
->>> Arrancando 03-long-range-uncorrelated.ipynb  (Mon Jun 29 15:38:53 CEST 2026)
+>>> Arrancando 03-long-range-uncorrelated.ipynb  (Wed Sep  2 19:09:57 CEST 2026)
 [NbConvertApp] Converting notebook 03-long-range-uncorrelated.ipynb to notebook
-[NbConvertApp] Writing 266918 bytes to 03-long-range-uncorrelated.ipynb
-<<< Terminado  03-long-range-uncorrelated.ipynb  (Mon Jun 29 22:02:45 CEST 2026)
+/Users/mariapereda/.pyenv/versions/3.11.9/lib/python3.11/site-packages/nbformat/__init__.py:96: MissingIDFieldWarning: Cell is missing an id field, this will become a hard error in future nbformat versions. You may want to use `normalize()` on your notebooks before validations (available since nbformat 5.1.4). Previous versions of nbformat are fixing this issue transparently, and will stop doing so in the future.
+  validate(nb)
+[IPKernelApp] WARNING | Kernel is running over TCP without encryption. All communication (including code and outputs) is sent in plain text and is susceptible to eavesdropping. Use IPC transport or launch with kernel manager-provisioned CurveZMQ keys to enable transport encryption.
+[NbConvertApp] Writing 348945 bytes to 03-long-range-uncorrelated.ipynb
+<<< Terminado  03-long-range-uncorrelated.ipynb  (Thu Sep  3 02:27:02 CEST 2026)
 
->>> Arrancando 04-lambda-sensitivity.ipynb  (Mon Jun 29 22:02:45 CEST 2026)
+>>> Arrancando 04-lambda-sensitivity.ipynb  (Thu Sep  3 02:27:02 CEST 2026)
 [NbConvertApp] Converting notebook 04-lambda-sensitivity.ipynb to notebook
-[NbConvertApp] Writing 189217 bytes to 04-lambda-sensitivity.ipynb
-<<< Terminado  04-lambda-sensitivity.ipynb  (Tue Jun 30 14:15:43 CEST 2026)
-
-=============================
-Todo terminado: Tue Jun 30 14:15:43 CEST 2026
-=============================
+[IPKernelApp] WARNING | Kernel is running over TCP without encryption. All communication (including code and outputs) is sent in plain text and is susceptible to eavesdropping. Use IPC transport or launch with kernel manager-provisioned CurveZMQ keys to enable transport encryption.
