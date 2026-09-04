@@ -29,3 +29,136 @@ Directorio: /Users/mariapereda/Library/CloudStorage/Dropbox/UPM/investigacion/Mi
 >>> Arrancando 04-lambda-sensitivity.ipynb  (Thu Sep  3 02:27:02 CEST 2026)
 [NbConvertApp] Converting notebook 04-lambda-sensitivity.ipynb to notebook
 [IPKernelApp] WARNING | Kernel is running over TCP without encryption. All communication (including code and outputs) is sent in plain text and is susceptible to eavesdropping. Use IPC transport or launch with kernel manager-provisioned CurveZMQ keys to enable transport encryption.
+[NbConvertApp] Writing 321707 bytes to 04-lambda-sensitivity.ipynb
+<<< Terminado  04-lambda-sensitivity.ipynb  (Thu Sep  3 22:00:16 CEST 2026)
+
+>>> Arrancando 05-real-network-CKM.ipynb  (Thu Sep  3 22:00:16 CEST 2026)
+[NbConvertApp] Converting notebook 05-real-network-CKM.ipynb to notebook
+[IPKernelApp] WARNING | Kernel is running over TCP without encryption. All communication (including code and outputs) is sent in plain text and is susceptible to eavesdropping. Use IPC transport or launch with kernel manager-provisioned CurveZMQ keys to enable transport encryption.
+[NbConvertApp] Writing 552505 bytes to 05-real-network-CKM.ipynb
+<<< Terminado  05-real-network-CKM.ipynb  (Thu Sep  3 22:17:59 CEST 2026)
+
+=============================
+Todo terminado: Thu Sep  3 22:17:59 CEST 2026
+=============================
+
+>>> Production sweep done. Starting network-realization robustness study (Thu Sep  3 22:17:59 CEST 2026)
+Resuming: 1110 results already present in /Users/mariapereda/Library/CloudStorage/Dropbox/UPM/investigacion/Mis_trabajos_en_curso/19. GabrielleMuller - TFM - Vigilantes 2.0 con distancia Estrada/long-range-social-pressure/robustness_checks/data/network_realization_robustness.csv
+TOTAL TIME: 0.0s
+topo  z   corr  L     regime   b  theta  between_network_mean  between_network_std  n_realizations
+  BA  4   corr  1   bistable 2.0    0.3              0.683586             0.040628              10
+  BA  4   corr  1       coop 1.0    0.0              0.996219             0.006063              10
+  BA  4   corr  1     defect 2.0    0.8              0.595397             0.036723              10
+  BA  4   corr  2   bistable 2.0    0.4              0.810545             0.042189              10
+  BA  4   corr  2       coop 1.0    0.0              0.996219             0.006063              10
+  BA  4   corr  2     defect 2.0    0.6              0.593552             0.036159              10
+  BA  4   corr  3   bistable 2.0    0.5              0.663781             0.035325              10
+  BA  4   corr  3       coop 1.8    0.3              0.992354             0.016179              10
+  BA  4   corr  3     defect 2.0    0.7              0.592750             0.037499              10
+  BA  4   corr  4   bistable 2.0    0.5              0.755603             0.035212              10
+  BA  4   corr  4       coop 1.4    0.4              0.995796             0.005875              10
+  BA  4   corr  4     defect 2.0    0.7              0.593518             0.035937              10
+  BA  4 uncorr  1   bistable 2.0    0.2              0.759317             0.049852              10
+  BA  4 uncorr  1       coop 1.0    0.0              0.996219             0.006063              10
+  BA  4 uncorr  1     defect 2.0    0.6              0.594750             0.037844              10
+  BA  4 uncorr  2   bistable 2.0    0.3              0.738674             0.035591              10
+  BA  4 uncorr  2       coop 1.8    0.1              0.994610             0.006107              10
+  BA  4 uncorr  2     defect 2.0    0.6              0.595268             0.036839              10
+  BA  4 uncorr  3   bistable 2.0    0.3              0.832736             0.035507              10
+  BA  4 uncorr  3       coop 1.6    0.2              0.993887             0.007328              10
+  BA  4 uncorr  3     defect 2.0    0.6              0.597063             0.036101              10
+  BA  4 uncorr  4   bistable 2.0    0.4              0.715575             0.035716              10
+  BA  4 uncorr  4       coop 1.4    0.0              0.995732             0.006453              10
+  BA  4 uncorr  4     defect 2.0    0.6              0.595901             0.034921              10
+  BA 16   corr  1   bistable 1.6    0.0              0.639241             0.140668              10
+  BA 16   corr  1       coop 1.0    0.0              0.955118             0.067941              10
+  BA 16   corr  1     defect 2.0    0.1              0.004070             0.003941              10
+  BA 16   corr  1 transition 1.5    0.1              0.462309             0.082341              10
+  BA 16   corr  2   bistable 1.8    0.0              0.475481             0.117607              10
+  BA 16   corr  2       coop 1.0    0.0              0.955118             0.067941              10
+  BA 16   corr  2     defect 2.0    0.6              0.002770             0.002934              10
+  BA 16   corr  2 transition 1.5    0.3              0.487733             0.053340              10
+  BA 16   corr  3   bistable 1.8    0.1              0.449195             0.055151              10
+  BA 16   corr  3       coop 1.0    0.0              0.955118             0.067941              10
+  BA 16   corr  3     defect 2.0    0.6              0.002769             0.002844              10
+  BA 16   corr  3 transition 1.7    0.2              0.481286             0.052492              10
+  BA 16   corr  4   bistable 1.8    0.1              0.463385             0.044004              10
+  BA 16   corr  4       coop 1.0    0.0              0.955118             0.067941              10
+  BA 16   corr  4     defect 2.0    0.6              0.002776             0.002545              10
+  BA 16   corr  4 transition 1.7    0.2              0.482826             0.051451              10
+  BA 16 uncorr  1   bistable 1.6    0.0              0.642062             0.127659              10
+  BA 16 uncorr  1       coop 1.0    0.0              0.955118             0.067941              10
+  BA 16 uncorr  1     defect 2.0    0.0              0.005549             0.007215              10
+  BA 16 uncorr  1 transition 1.4    0.4              0.528546             0.120010              10
+  BA 16 uncorr  2       coop 1.0    0.0              0.955118             0.067941              10
+  BA 16 uncorr  2     defect 2.0    0.6              0.002571             0.002769              10
+  BA 16 uncorr  2 transition 1.8    0.0              0.446599             0.126462              10
+  BA 16 uncorr  3       coop 1.0    0.0              0.955118             0.067941              10
+  BA 16 uncorr  3     defect 2.0    0.7              0.002700             0.002850              10
+  BA 16 uncorr  3 transition 1.7    0.1              0.482287             0.053345              10
+  BA 16 uncorr  4   bistable 1.9    0.0              0.420612             0.112183              10
+  BA 16 uncorr  4       coop 1.0    0.0              0.955118             0.067941              10
+  BA 16 uncorr  4     defect 2.0    0.7              0.003027             0.003200              10
+  BA 16 uncorr  4 transition 1.5    0.4              0.491259             0.057967              10
+  ER  4   corr  1   bistable 1.6    0.2              0.875141             0.089579              10
+  ER  4   corr  1       coop 1.0    0.0              1.000000             0.000000              10
+  ER  4   corr  1     defect 1.7    0.4              0.000430             0.000793              10
+  ER  4   corr  1 transition 1.3    0.4              0.406817             0.023348              10
+  ER  4   corr  2   bistable 1.9    0.0              0.682246             0.156716              10
+  ER  4   corr  2       coop 1.0    0.0              1.000000             0.000000              10
+  ER  4   corr  2     defect 1.7    0.6              0.000483             0.000766              10
+  ER  4   corr  2 transition 1.3    0.4              0.515917             0.049132              10
+  ER  4   corr  3   bistable 1.9    0.3              0.652227             0.134410              10
+  ER  4   corr  3       coop 1.4    0.2              1.000000             0.000000              10
+  ER  4   corr  3     defect 1.7    0.5              0.000604             0.000977              10
+  ER  4   corr  3 transition 2.0    0.0              0.633347             0.149842              10
+  ER  4   corr  4       coop 1.0    0.0              1.000000             0.000000              10
+  ER  4   corr  4     defect 1.7    0.5              0.002614             0.006243              10
+  ER  4   corr  4 transition 1.7    0.4              0.618761             0.093958              10
+  ER  4 uncorr  1   bistable 1.3    0.2              0.784977             0.056643              10
+  ER  4 uncorr  1       coop 1.0    0.0              1.000000             0.000000              10
+  ER  4 uncorr  1     defect 1.7    0.0              0.000525             0.000759              10
+  ER  4 uncorr  1 transition 1.3    0.5              0.404727             0.022956              10
+  ER  4 uncorr  2   bistable 1.5    0.0              0.863926             0.072644              10
+  ER  4 uncorr  2       coop 1.3    0.1              0.998609             0.004400              10
+  ER  4 uncorr  2     defect 1.7    0.0              0.000642             0.000802              10
+  ER  4 uncorr  2 transition 1.3    0.6              0.405704             0.024649              10
+  ER  4 uncorr  3   bistable 1.5    0.1              0.461656             0.084258              10
+  ER  4 uncorr  3       coop 1.2    0.1              0.999993             0.000022              10
+  ER  4 uncorr  3     defect 1.7    0.1              0.000411             0.000654              10
+  ER  4 uncorr  3 transition 1.3    0.3              0.443908             0.028622              10
+  ER  4 uncorr  4   bistable 1.5    0.1              0.670958             0.063096              10
+  ER  4 uncorr  4       coop 1.1    0.3              0.999919             0.000118              10
+  ER  4 uncorr  4     defect 1.7    0.0              0.004857             0.007141              10
+  ER  4 uncorr  4 transition 1.4    0.2              0.688414             0.089688              10
+  ER 16   corr  1   bistable 1.1    0.2              0.790847             0.048909              10
+  ER 16   corr  1       coop 1.1    0.1              0.998583             0.001394              10
+  ER 16   corr  1     defect 1.4    0.0              0.001736             0.001182              10
+  ER 16   corr  1 transition 1.1    0.3              0.314182             0.010202              10
+  ER 16   corr  2       coop 1.2    0.0              0.998705             0.001210              10
+  ER 16   corr  2     defect 1.4    0.1              0.000000             0.000000              10
+  ER 16   corr  2 transition 1.2    0.3              0.415992             0.060734              10
+  ER 16   corr  3       coop 1.1    0.2              0.997008             0.002794              10
+  ER 16   corr  3     defect 1.4    0.1              0.000062             0.000130              10
+  ER 16   corr  3 transition 1.2    0.4              0.346709             0.047732              10
+  ER 16   corr  4   bistable 1.3    0.2              0.403936             0.077063              10
+  ER 16   corr  4       coop 1.2    0.0              0.998381             0.001476              10
+  ER 16   corr  4     defect 1.4    0.1              0.006015             0.006936              10
+  ER 16   corr  4 transition 1.2    0.4              0.601541             0.071374              10
+  ER 16 uncorr  1       coop 1.1    0.0              0.998980             0.000940              10
+  ER 16 uncorr  1     defect 1.4    0.0              0.000106             0.000253              10
+  ER 16 uncorr  1 transition 1.1    0.2              0.450941             0.048081              10
+  ER 16 uncorr  2       coop 1.1    0.1              0.997147             0.003645              10
+  ER 16 uncorr  2     defect 1.4    0.0              0.000030             0.000094              10
+  ER 16 uncorr  2 transition 1.2    0.0              0.475659             0.153320              10
+  ER 16 uncorr  3       coop 1.1    0.0              0.998358             0.001829              10
+  ER 16 uncorr  3     defect 1.4    0.1              0.000061             0.000107              10
+  ER 16 uncorr  3 transition 1.2    0.2              0.535503             0.081789              10
+  ER 16 uncorr  4       coop 1.2    0.0              0.998055             0.001928              10
+  ER 16 uncorr  4     defect 1.4    0.1              0.001000             0.003162              10
+  ER 16 uncorr  4 transition 1.2    0.3              0.545299             0.075711              10
+Saved: /Users/mariapereda/Library/CloudStorage/Dropbox/UPM/investigacion/Mis_trabajos_en_curso/19. GabrielleMuller - TFM - Vigilantes 2.0 con distancia Estrada/long-range-social-pressure/robustness_checks/data/network_realization_robustness.csv /Users/mariapereda/Library/CloudStorage/Dropbox/UPM/investigacion/Mis_trabajos_en_curso/19. GabrielleMuller - TFM - Vigilantes 2.0 con distancia Estrada/long-range-social-pressure/robustness_checks/data/network_realization_robustness_summary.csv
+
+==============================================
+Full revision pipeline done: Thu Sep  3 22:18:00 CEST 2026
+==============================================

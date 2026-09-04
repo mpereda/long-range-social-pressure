@@ -26,3 +26,15 @@ Directorio: /Users/mariapereda/Library/CloudStorage/Dropbox/UPM/investigacion/Mi
 >>> Arrancando 04-lambda-sensitivity.ipynb  (Thu Sep  3 02:27:02 CEST 2026)
 [NbConvertApp] Converting notebook 04-lambda-sensitivity.ipynb to notebook
 [IPKernelApp] WARNING | Kernel is running over TCP without encryption. All communication (including code and outputs) is sent in plain text and is susceptible to eavesdropping. Use IPC transport or launch with kernel manager-provisioned CurveZMQ keys to enable transport encryption.
+[NbConvertApp] Writing 321707 bytes to 04-lambda-sensitivity.ipynb
+<<< Terminado  04-lambda-sensitivity.ipynb  (Thu Sep  3 22:00:16 CEST 2026)
+
+>>> Arrancando 05-real-network-CKM.ipynb  (Thu Sep  3 22:00:16 CEST 2026)
+[NbConvertApp] Converting notebook 05-real-network-CKM.ipynb to notebook
+[IPKernelApp] WARNING | Kernel is running over TCP without encryption. All communication (including code and outputs) is sent in plain text and is susceptible to eavesdropping. Use IPC transport or launch with kernel manager-provisioned CurveZMQ keys to enable transport encryption.
+[NbConvertApp] Writing 552505 bytes to 05-real-network-CKM.ipynb
+<<< Terminado  05-real-network-CKM.ipynb  (Thu Sep  3 22:17:59 CEST 2026)
+
+=============================
+Todo terminado: Thu Sep  3 22:17:59 CEST 2026
+=============================
