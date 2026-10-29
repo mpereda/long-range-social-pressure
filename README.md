@@ -1,8 +1,7 @@
-![Python](https://img.shields.io/badge/Python-3.10%2B-blue)
-![Status](https://img.shields.io/badge/Status-Accepted-brightgreen)
-![Journal](https://img.shields.io/badge/Journal-Physical_Review_E-red)
-[![DOI](https://img.shields.io/badge/DOI-10.1103%2Fyvh4--8yxx-blue)](https://doi.org/10.1103/yvh4-8yxx)
-[![arXiv](https://img.shields.io/badge/arXiv-2607.06056-b31b1b)](https://doi.org/10.48550/arXiv.2607.06056)
+[![Python](https://img.shields.io/badge/Python-3.10%2B-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
+[![Physical Review E](https://img.shields.io/badge/Physical_Review_E-Accepted-2EA44F?style=for-the-badge&labelColor=1F3A5F)](https://doi.org/10.1103/yvh4-8yxx)
+[![DOI](https://img.shields.io/badge/DOI-10.1103%2Fyvh4--8yxx-FAB70C?style=for-the-badge&logo=doi&logoColor=white)](https://doi.org/10.1103/yvh4-8yxx)
+[![arXiv](https://img.shields.io/badge/arXiv-2607.06056-B31B1B?style=for-the-badge&logo=arxiv&logoColor=white)](https://doi.org/10.48550/arXiv.2607.06056)
 
 # long-range-social-pressure
 
