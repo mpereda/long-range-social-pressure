@@ -1,11 +1,11 @@
 [![Python](https://img.shields.io/badge/Python-3.10%2B-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
-[![Physical Review E](https://img.shields.io/badge/Physical_Review_E-Accepted-2EA44F?style=for-the-badge&labelColor=1F3A5F)](https://doi.org/10.1103/yvh4-8yxx)
+[![Physical Review E](https://img.shields.io/badge/Phys._Rev._E-114,_054305_(2026)-2EA44F?style=for-the-badge&labelColor=1F3A5F)](https://doi.org/10.1103/yvh4-8yxx)
 [![DOI](https://img.shields.io/badge/DOI-10.1103%2Fyvh4--8yxx-FAB70C?style=for-the-badge&logo=doi&logoColor=white)](https://doi.org/10.1103/yvh4-8yxx)
 [![arXiv](https://img.shields.io/badge/arXiv-2607.06056-B31B1B?style=for-the-badge&logo=arxiv&logoColor=white)](https://doi.org/10.48550/arXiv.2607.06056)
 
 # long-range-social-pressure
 
-Code accompanying the paper **"Long-range social pressure and the evolution of cooperation in multiplex networks"** by M. Pereda and G. Muller, accepted for publication in *Physical Review E* (2026), [doi:10.1103/yvh4-8yxx](https://doi.org/10.1103/yvh4-8yxx).
+Code accompanying the paper **"Long-range social pressure and the evolution of cooperation in multiplex networks"** by M. Pereda and G. Muller, *Physical Review E* **114**, 054305 (2026), [doi:10.1103/yvh4-8yxx](https://doi.org/10.1103/yvh4-8yxx).
 
 ## Overview
 
